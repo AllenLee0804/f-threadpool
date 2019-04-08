@@ -19,8 +19,8 @@ typedef struct queue_task
 
 typedef struct queue
 {
-    int      head;
-    int      tail;
+    int      head;  // read
+    int      tail;  // write
     int      size;
     int      capcity;
     task_t*  tasks;

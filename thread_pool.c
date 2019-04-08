@@ -168,7 +168,8 @@ static void *threadpool_thread(void *threadpool)
 
     for(;;)
     {
-        task_t* task = pool->qop->pop(pool->queue, 50);
+        task_t* task = pool->qop->pop(pool->queue, 50); mutex / epoll_wait / æ
+
         if (task != NULL)
         {
             task->run(task->argv);

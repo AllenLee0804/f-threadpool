@@ -83,6 +83,17 @@ BOOL async_eventfd_queue_push_tail(async_queue_t* q, task_t *task)
 
 task_t* async_eventfd_queue_pop_head(async_queue_t* q, int timeout)
 {
+    task_t* task = queue_pop_head(q->queue);
+    if (task != NULL)
+    {
+        return task;
+    }
+    else
+    {
+        sched_yield();
+        return NULL;
+    }
+/*
     unsigned long long i = 0;
     struct epoll_event events[MAX_EVENTS];
     int nfds = epoll_wait(q->epollfd, events, MAX_EVENTS, -1);
@@ -110,7 +121,7 @@ task_t* async_eventfd_queue_pop_head(async_queue_t* q, int timeout)
         return task;
     }
 
-    return NULL;
+    return NULL;*/
 }
 
 void async_eventfd_queue_free(async_queue_t *q)
